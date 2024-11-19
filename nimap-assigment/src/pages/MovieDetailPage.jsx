@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import MovieDetail from "../component/MovieDetailCard";
 import CastCard from "../component/CastImagesCard";
 import Grid from "@mui/material/Grid2";
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 
 
 const MovieDetailPage = () => {
@@ -59,6 +59,7 @@ const MovieDetailPage = () => {
             ))}
           </Grid>
         </Box>
+        <Stack sx={{width: "100%"}}></Stack>
       </Box>
     </>
   );
