@@ -1,4 +1,4 @@
-import { Box, Pagination, Stack } from "@mui/material";
+import { Box, CircularProgress, Pagination, Stack } from "@mui/material";
 import Header from "../component/common/Header";
 import MovieCard from "../component/MovieCard";
 import Grid from "@mui/material/Grid2";
@@ -9,7 +9,6 @@ import { getUpcomingMovies } from "../store/slices/moviesSlice";
 const UpcomingMovie = () => {
   const [page, setPage] = useState(1);
   const { upcomingMovies } = useSelector((state) => state.movies);
-  console.log({ upcomingMovies });
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -17,17 +16,29 @@ const UpcomingMovie = () => {
   }, [page]);
 
   const handlePageChange = (event, value) => {
-    console.log("page change called : ",value)
     setPage(value);
   };
 
   return (
+    <>
+    {upcomingMovies.loading ? (
+      <Box
+        sx={{ position: "fixed" , top: "50%" , left: "50%" }}
+      >
+        <CircularProgress color="#34393F" />
+      </Box>
+    ) : (
     <Box sx={{ width: "100%", height: "100%", bgcolor: "#282C34" }}>
       <Header />
       <Box sx={{ flexGrow: 1, width: "100%", my: 4 }}>
         <Grid container spacing={2}>
-          {upcomingMovies?.data?.results?.map((item,index) => (
-            <Grid key={index} item size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }} sx={{cursor: 'pointer'}}>
+          {upcomingMovies?.data?.results?.map((item, index) => (
+            <Grid
+              key={index}
+              item
+              size={{ xs: 12, sm: 6, md: 4, lg: 3, xl: 2 }}
+              sx={{ cursor: "pointer" }}
+            >
               <MovieCard data={item} />
             </Grid>
           ))}
@@ -36,7 +47,7 @@ const UpcomingMovie = () => {
       <Stack
         alignItems="center"
         justifyContent="center"
-        sx={{width: "100%"}}
+        sx={{ width: "100%", py: 4 }}
       >
         <Box sx={{ color: "#fff" }}>
           <Pagination
@@ -57,6 +68,8 @@ const UpcomingMovie = () => {
         </Box>
       </Stack>
     </Box>
+    )}
+    </>
   );
 };
 

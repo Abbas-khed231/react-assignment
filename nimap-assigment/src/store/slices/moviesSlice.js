@@ -37,12 +37,10 @@ const movieSlice = createSlice({
 	},
 	reducers: {
 		getPopularMovies: (state, action) => {
-			console.log({action})
 			state.popularMovies.loading = true;
 			state.popularMovies.data = null;
 		},
 		getPopularMoviesSuccess: (state, action) => {
-			console.log({action})
 			state.popularMovies.loading = false;
 			state.popularMovies.data = action.payload;
 		},

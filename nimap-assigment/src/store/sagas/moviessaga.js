@@ -41,7 +41,6 @@ function* getPopularMoviesSaga(action) {
 
 function* getMovieDetailSaga(action) {
 	try {
-		console.log("saga called: " + action);
 		const res = yield call(getMovieDetailApi, action.payload);
 		if (res.status === 200) {
 			yield put(getMovieDetailSuccess(res.data)); 

@@ -4,7 +4,6 @@ import Grid from "@mui/material/Grid2";
 import Text from "./common/Text";
 
 const CastCard = ({ name = "", character_name = "", image = "" }) => {
-  console.log("name:", name);
 
   return (
     <Box sx={{ paddingBottom: "25px", borderRadius: "0px", textAlign: "center" }}>

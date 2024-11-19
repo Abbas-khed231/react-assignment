@@ -14,7 +14,6 @@ const getPopularMoviesApi = async (payload) => {
 
 const getMovieDetailApi = async (payload) => {
 	const { movieId } = payload;
-	console.log({ movieId: movieId });
 	return axios.get(`/movie/${movieId}`, {
 		params: {
 			api_key: API_KEY,

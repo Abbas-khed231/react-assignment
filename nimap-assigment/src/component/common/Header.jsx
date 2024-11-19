@@ -25,7 +25,12 @@ const navItems = [
   { name: "Upcoming", path: "/upcoming" },
 ];
 
-const Header = ({search, handleSearchChange}) => {
+const Header = ({
+  search = "",
+  handleSearchChange = () => {},
+  onSearchClick = () => {},
+  isHomePage = false,
+}) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -40,7 +45,11 @@ const Header = ({search, handleSearchChange}) => {
       <Divider />
       <List>
         {navItems.map((item, index) => (
-          <Link key={item.name} to={item.path} style={{ textDecoration: "none", color: "inherit" }}>
+          <Link
+            key={item.name}
+            to={item.path}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
             <ListItem key={index} disablePadding>
               <ListItemButton sx={{ textAlign: "center" }}>
                 <ListItemText primary={item.name} />
@@ -58,7 +67,7 @@ const Header = ({search, handleSearchChange}) => {
       <AppBar
         component="nav"
         sx={{
-          px: { xs: 2, sm: 5, lg: 10 }, 
+          px: { xs: 2, sm: 5, lg: 10 },
           py: 2,
           bgcolor: "#34393F",
         }}
@@ -88,10 +97,18 @@ const Header = ({search, handleSearchChange}) => {
 
           <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 2 }}>
             {navItems.map((item, index) => (
-              <Link key={item.name} to={item.path} style={{ textDecoration: "none" }}>
+              <Link
+                key={item.name}
+                to={item.path}
+                style={{ textDecoration: "none" }}
+              >
                 <Button
                   key={index}
-                  sx={{ color: "#989C9E", textTransform: "none", fontSize: "16px" }}
+                  sx={{
+                    color: "#989C9E",
+                    textTransform: "none",
+                    fontSize: "16px",
+                  }}
                 >
                   {item.name}
                 </Button>
@@ -99,19 +116,29 @@ const Header = ({search, handleSearchChange}) => {
             ))}
           </Box>
 
-          <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-            <TextField placeholder="Search" size="small" value={search} onChange={handleSearchChange} />
-            <Button
-              sx={{
-                fontSize: "16px",
-                color: "#fff",
-                backgroundColor: "#989C9E",
-                textTransform: "none",
-              }}
-            >
-              Search
-            </Button>
-          </Box>
+          {isHomePage ? (
+            <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+              <TextField
+                placeholder="Search"
+                size="small"
+                value={search}
+                onChange={handleSearchChange}
+              />
+              <Button
+                sx={{
+                  fontSize: "16px",
+                  color: "#fff",
+                  backgroundColor: "#989C9E",
+                  textTransform: "none",
+                }}
+                onClick={onSearchClick}
+              >
+                Search
+              </Button>
+            </Box>
+          ) : (
+            <></>
+          )}
         </Toolbar>
       </AppBar>
 
